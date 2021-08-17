@@ -1,8 +1,4 @@
-FROM node:10-alpine
-LABEL NAME="oih-object-generator"
-LABEL MAINTAINER Shterion Yanev "syanev@wice.de"
-LABEL SUMMARY="This image is used to start the OIH object generator"
-
+FROM node:10-alpine AS base
 RUN apk --no-cache add \
     python \
     make \
@@ -20,5 +16,4 @@ COPY . /usr/src/app
 RUN chown -R node:node .
 
 USER node
-
-ENTRYPOINT ["node", "./node_modules/elasticio-sailor-nodejs/run.js"]
+ENTRYPOINT ["node", "./node_modules/@openintegrationhub/ferryman/runGlobal.js"]
